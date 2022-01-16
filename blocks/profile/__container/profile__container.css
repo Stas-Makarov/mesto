@@ -1,23 +1,21 @@
-.header {
+.profile__container {
     display: flex;
-    align-items: flex-start;
-    min-width: 880px;
-    height: 74px;
-    margin: 45px auto 0;
+    margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 @media screen and (max-width: 1023px) {
-    .header {
+    .profile__container {
         width: ;
         height: ;
     }  
 }
 
 @media screen and (max-width: 767px) {
-    .header {
+    .profile__container {
+        flex-direction: column;
         min-width: 282px;
-        height: 56px;
-        margin-top: 28px;
+        min-height: 
     }  
 }

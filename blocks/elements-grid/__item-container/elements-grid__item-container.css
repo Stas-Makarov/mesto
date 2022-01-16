@@ -1,0 +1,10 @@
+.elements-grid__item-container {
+    max-width: 282px;
+    max-height: 361px;
+    border-radius: 10px;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+    background-color: #FFFFFF;
+    overflow: hidden;
+}

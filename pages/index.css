@@ -5,8 +5,22 @@
 @import url('../blocks/header/_bottom-line/header_bottom-line.css');
 @import url('../blocks/header/__logo/header__logo.css');
 @import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__container/profile__container.css');
+@import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__info/profile__info.css');
+@import url('../blocks/profile/__heading-text/profile__heading-text.css');
+@import url('../blocks/profile/__edit-button/profile__edit-button.css');
+@import url('../blocks/profile/__paragraph__text/profile__paragraph-text.css');
+@import url('../blocks/profile/__add-button/__add-button.css');
+@import url('');
 
 
 
+
+@import url('../blocks/elements-grid/elements-grid.css');
+@import url('../blocks/elements-grid/__item-container/elements-grid__item-container.css');
+@import url('../blocks/elements-grid/__item-image/elements-grid__item-image.css');
+@import url('../blocks/elements-grid/__item-text/elements-grid__item-text.css');
+@import url('../blocks/elements-grid/__item-like/elements-grid__item-like.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');

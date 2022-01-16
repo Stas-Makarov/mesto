@@ -1,7 +1,22 @@
 .footer {
     display: flex;
     min-width: 880px;
-    margin: 0 auto;
+    margin: 0 auto 60px;
     padding: 0;
     align-items: flex-start;
+}
+
+@media screen and (max-width: 1023px) {
+    .footer {
+        width: ;
+        height: ;
+    }  
+}
+
+@media screen and (max-width: 767px) {
+    .footer {
+        min-width: 282px;
+        height: 14px;
+        margin-bottom: 36px;
+    }  
 }

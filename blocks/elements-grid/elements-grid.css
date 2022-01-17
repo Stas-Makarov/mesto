@@ -12,8 +12,10 @@
 
 @media screen and (max-width: 1023px) {
     .elements-grid {
-        width: ;
-        height: ;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(3, auto);
+        max-width: 581px;
+        min-height: 1123px;
     }  
 }
 

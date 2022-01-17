@@ -5,17 +5,9 @@
     align-items: center;
 }
 
-@media screen and (max-width: 1023px) {
-    .profile__container {
-        width: ;
-        height: ;
-    }  
-}
-
 @media screen and (max-width: 767px) {
     .profile__container {
         flex-direction: column;
         min-width: 282px;
-        min-height: 
     }  
 }

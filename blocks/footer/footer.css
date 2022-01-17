@@ -8,8 +8,7 @@
 
 @media screen and (max-width: 1023px) {
     .footer {
-        width: ;
-        height: ;
+        min-width: 581px;
     }  
 }
 

@@ -12,11 +12,6 @@
 @import url('../blocks/profile/__edit-button/profile__edit-button.css');
 @import url('../blocks/profile/__paragraph__text/profile__paragraph-text.css');
 @import url('../blocks/profile/__add-button/__add-button.css');
-@import url('');
-
-
-
-
 @import url('../blocks/elements-grid/elements-grid.css');
 @import url('../blocks/elements-grid/__item-container/elements-grid__item-container.css');
 @import url('../blocks/elements-grid/__item-image/elements-grid__item-image.css');
@@ -24,3 +19,7 @@
 @import url('../blocks/elements-grid/__item-like/elements-grid__item-like.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__opene/popup__opene.css');
+@import url('../blocks/popup/__close/popup__close.css');

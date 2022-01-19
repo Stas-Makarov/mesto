@@ -1,6 +1,9 @@
 .elements-grid__item-like {
+    display: flex;
     width: 22px; 
-    height: 19px;  
+    height: 19px; 
+    background-image: url('../../../images/сердце.png');
+    background-size: contain;
 }
 
 .elements-grid__item-like:hover {

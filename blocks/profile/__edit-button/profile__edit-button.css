@@ -6,7 +6,12 @@
     background-image: url('../../../images/карандаш.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #000000;;
+    background-color: #000000;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
+    transition: opacity, .3s;
 }
 
 @media screen and (max-width: 1023px) {
@@ -18,7 +23,6 @@
 
 @media screen and (max-width: 767px) {
     .profile__edit-button {
-        position: absolute;
         right: 5px;
         top: 8px;
     }  

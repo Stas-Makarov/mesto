@@ -16,54 +16,54 @@
         <div class="profile__container">
           <img class="profile__avatar" src="./images/кусто.jpg" alt="фото кусто">
         <div class="profile__info">
-          <h1 class="profile__heading-text">Жак-Ив Кусто<button class="profile__edit-button"></button></h1>
+          <h1 class="profile__heading-text">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button"></button>
           <p class="profile__paragraph-text">Исследователь океана</p>
         </div>
         </div>
         <button class="profile__add-button"></button>
       </section>
-      
       <section class="elements-grid">
         <figure class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/карачаевск.png" alt="изображение карачаевска">
-          <figcaption class="">
+          <div class="elements-grid__item-caption">
             <h3 class="elements-grid__item-text">Карачаевск</h3>
-            <div class="elements-gridl__item-like"></div>
-          </figcaption>
+            <div class="elements-grid__item-like disabled"></div>
+          </div>
         </figure>
         <figure class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/эльбрус.png" alt="изображение горы эльбрус">
-          <figcaption class="elements-grid__item-text">
-            Гора Эльбрус
-            <img class="elements-gridl__item-like" src="./images/сердце.png" alt="лайк">
+          <figcaption class="elements-grid__item-caption">
+            <h3 class="elements-grid__item-text">Гора Эльбрус</h3>
+            <div class="elements-grid__item-like disabled"></div>
           </figcaption>
         </figure>
         <figure class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/домбай.png" alt="изображение горы домбай">
-          <figcaption class="elements-grid__item-text">
-            Домбай
-            <img class="elements-gridl__item-like" src="./images/сердце.png" alt="лайк">
+          <figcaption class="elements-grid__item-caption">
+            <h3 class="elements-grid__item-text">Домбай</h3>
+            <div class="elements-grid__item-like disabled"></div>
           </figcaption>
         </figure>
         <figure class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/эльбрус.png" alt="изображение горы эльбрус">
-          <figcaption class="elements-grid__item-text">
-            Гора Эльбрус
-            
+          <figcaption class="elements-grid__item-caption">
+            <h3 class="elements-grid__item-text">Гора Эльбрус</h3>
+            <div class="elements-grid__item-like disabled"></div>
           </figcaption>
         </figure>
         <figure class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/домбай.png" alt="изображение горы домбай">
-          <figcaption class="elements-grid__item-text">
-            Домбай
-            <img class="elements-gridl__item-like" src="./images/сердце.png" alt="лайк">
+          <figcaption class="elements-grid__item-caption">
+            <h3 class="elements-grid__item-text">Домбай</h3>
+            <div class="elements-grid__item-like disabled"></div>
           </figcaption>
         </figure>
         <figure class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/карачаевск.png" alt="изображение карачаевска">
-          <figcaption class="elements-grid__item-text">
-            Карачаево-Черкессия
-            <img class="elements-gridl__item-like" src="./images/сердце.png" alt="лайк">
+          <figcaption class="elements-grid__item-caption">
+            <h3 class="elements-grid__item-text">Карачаево-Черкессия</h3>
+            <div class="elements-grid__item-like disabled"></div>
           </figcaption>
         </figure>
       </section> 
@@ -76,8 +76,8 @@
         <button class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form">
-          <input class="popup__form-item" type="text" value="Жак-Ив Кусто">     
-          <input class="popup__form-item" type="text" value="Исследователь океана">
+          <input class="popup__form-item" type="text" name="name" value="Жак-Ив Кусто">     
+          <input class="popup__form-item" type="text" name="job" value="Исследователь океана">
         </form>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </div>

@@ -4,6 +4,9 @@
     height: 19px; 
     background-image: url('../../../images/сердце.png');
     background-size: cover;
+    border: none;
+    background-color: transparent;
+    padding: 0;
 }
 
 .elements-grid__item-like:hover {

@@ -11,11 +11,11 @@ function popupOpen() {
     const inputs = formElement.elements;
     inputs['name'].value =  name.textContent;
     inputs['job'].value = job.textContent;
-    popup.classList.add('popup__open');
+    popup.classList.add('popup_opened');
 }
 
 function popupClose() {
-    popup.classList.remove('popup__open');
+    popup.classList.remove('popup_opened');
 }
 
 function formSubmitHandler(evt) {

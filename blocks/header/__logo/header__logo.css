@@ -2,6 +2,7 @@
     width: 142px;
     height: 33px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .header__logo:hover {
@@ -13,5 +14,6 @@
     .header__logo {
         width: 104px;
         height: 24px;
+        margin: 0 auto auto 27px;
     }  
 }

@@ -17,8 +17,9 @@
 
 @media screen and (max-width: 767px) {
     .profile__info {
-        margin: 22px auto 36px;
+        margin: 24px auto 36px;
         width: 282px;
         height: 54px;
+        align-items: center;
     }  
 }

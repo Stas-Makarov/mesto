@@ -4,13 +4,16 @@
     height: 24px;
     border: 1px solid #FFFFFF;
     box-sizing: border-box;
-    background-image: url('../../../images/карандаш.png');
+    background-image: url('../../../images/карандаш.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-color: #000000;
+    background-size: 10px;
+    margin: 0;
+    padding: 0;
     top: 15px;
     right: 0;
-
+    cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -20,6 +23,7 @@
 
 @media screen and (max-width: 1023px) {
     .profile__edit-button {
+        background-size: 7.5px;
         width: 18px;
         height: 18px;
         top: 9px;
@@ -28,7 +32,7 @@
 
 @media screen and (max-width: 767px) {
     .profile__edit-button {
-        right: 5px;
+        right: 19px;
         top: 8px;
     }  
 }

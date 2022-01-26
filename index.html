@@ -6,7 +6,7 @@
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
-<body>
+<body class="body">
   <div class="page">
     <header class="header header_bottom-line">
       <img class="header__logo" src="./images/logo.png" alt="логотип">
@@ -15,57 +15,57 @@
       <section class="profile">
         <div class="profile__container">
           <img class="profile__avatar" src="./images/кусто.jpg" alt="фото кусто">
-        <div class="profile__info">
-          <h1 class="profile__heading-text">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"></button>
-          <p class="profile__paragraph-text">Исследователь океана</p>
+          <div class="profile__info">
+            <h1 class="profile__heading-text">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="menu"></button>
+            <p class="profile__paragraph-text">Исследователь океана</p>
+          </div>
         </div>
-        </div>
-        <button class="profile__add-button"></button>
+        <button class="profile__add-button" type="menu"></button>
       </section>
       <section class="elements-grid">
-        <figure class="elements-grid__item-container">
+        <article class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/карачаевск.png" alt="изображение карачаевска">
           <div class="elements-grid__item-caption">
-            <h3 class="elements-grid__item-text">Карачаевск</h3>
-            <button class="elements-grid__item-like disabled"></button>
+            <h2 class="elements-grid__item-text">Карачаевск</h2>
+            <button class="elements-grid__item-like disabled" type="submit"></button>
           </div>
-        </figure>
-        <figure class="elements-grid__item-container">
+        </article>
+        <article class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/эльбрус.png" alt="изображение горы эльбрус">
-          <figcaption class="elements-grid__item-caption">
-            <h3 class="elements-grid__item-text">Гора Эльбрус</h3>
-            <button class="elements-grid__item-like disabled"></button>
-          </figcaption>
-        </figure>
-        <figure class="elements-grid__item-container">
+          <div class="elements-grid__item-caption">
+            <h2 class="elements-grid__item-text">Гора Эльбрус</h2>
+            <button class="elements-grid__item-like disabled" type="submit"></button>
+          </div>
+        </article>
+        <article class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/домбай.png" alt="изображение горы домбай">
-          <figcaption class="elements-grid__item-caption">
-            <h3 class="elements-grid__item-text">Домбай</h3>
-            <button class="elements-grid__item-like disabled"></button>
-          </figcaption>
-        </figure>
-        <figure class="elements-grid__item-container">
+          <div class="elements-grid__item-caption">
+            <h2 class="elements-grid__item-text">Домбай</h2>
+            <button class="elements-grid__item-like disabled" type="submit"></button>
+          </div>
+        </article>
+        <article class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/эльбрус.png" alt="изображение горы эльбрус">
-          <figcaption class="elements-grid__item-caption">
-            <h3 class="elements-grid__item-text">Гора Эльбрус</h3>
-            <button class="elements-grid__item-like disabled"></button>
-          </figcaption>
-        </figure>
-        <figure class="elements-grid__item-container">
+          <div class="elements-grid__item-caption">
+            <h2 class="elements-grid__item-text">Гора Эльбрус</h2>
+            <button class="elements-grid__item-like disabled" type="submit"></button>
+          </div>
+        </article>
+        <article class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/домбай.png" alt="изображение горы домбай">
-          <figcaption class="elements-grid__item-caption">
-            <h3 class="elements-grid__item-text">Домбай</h3>
-            <button class="elements-grid__item-like disabled"></button>
-          </figcaption>
-        </figure>
-        <figure class="elements-grid__item-container">
+          <div class="elements-grid__item-caption">
+            <h2 class="elements-grid__item-text">Домбай</h2>
+            <button class="elements-grid__item-like disabled" type="submit"></button>
+          </div>
+        </article>
+        <article class="elements-grid__item-container">
           <img class="elements-grid__item-image" src="./images/карачаевск.png" alt="изображение карачаевска">
-          <figcaption class="elements-grid__item-caption">
-            <h3 class="elements-grid__item-text">Карачаево-Черкессия</h3>
-            <button class="elements-grid__item-like disabled"></button>
-          </figcaption>
-        </figure>
+          <div class="elements-grid__item-caption">
+            <h2 class="elements-grid__item-text">Карачаево-Черкессия</h2>
+            <button class="elements-grid__item-like disabled" type="submit"></button>
+          </div>
+        </article>
       </section> 
     </main>
     <footer class="footer">
@@ -75,12 +75,11 @@
       <div class="popup__container">
         <button class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="popup__form">
-          <input class="popup__form-item" type="text" name="name" value="Жак-Ив Кусто">     
-          <input class="popup__form-item" type="text" name="job" value="Исследователь океана">
+        <form class="popup__form" name="form">
+          <input class="popup__form-item" type="text" name="name">     
+          <input class="popup__form-item" type="text" name="job">
           <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
-        
+        </form> 
       </div>
     </div>
   </div>

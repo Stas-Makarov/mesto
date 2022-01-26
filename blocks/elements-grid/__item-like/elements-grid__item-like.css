@@ -2,11 +2,12 @@
     display: flex;
     width: 22px;
     height: 19px;
-    background-image: url('../../../images/сердце.png');
+    background-image: url('../../../images/сердце.svg');
     background-size: cover;
     border: none;
     background-color: transparent;
     padding: 0;
+    cursor: pointer;
 }
 
 .elements-grid__item-like:hover {

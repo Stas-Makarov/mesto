@@ -6,7 +6,7 @@
     text-align: center;
     color: #FFFFFF;
     background-color: #000000;
-    margin: 48px 0 0;
+    margin: 48px 0 37px;
     padding: 0;
     border: none;
     border-radius: 2px;
@@ -22,7 +22,7 @@
     .popup__save-button {
         width: 238px;
         height: 46px;
-        margin: 45px 0 0;
+        margin: 45px 0 25px;
         font-weight: normal;
         font-size: 14px;
         line-height: 17px;

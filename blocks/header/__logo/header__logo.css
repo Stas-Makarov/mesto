@@ -3,6 +3,8 @@
     height: 33px;
     object-fit: cover;
     cursor: pointer;
+    margin: 0 auto 41px 0;
+    padding: 0;
 }
 
 .header__logo:hover {
@@ -14,6 +16,7 @@
     .header__logo {
         width: 104px;
         height: 24px;
-        margin: 0 auto auto 27px;
+        margin: 0 auto 32px 27px;
+        padding: 0;
     }  
 }

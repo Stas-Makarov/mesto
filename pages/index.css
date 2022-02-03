@@ -14,7 +14,9 @@
 @import url('../blocks/profile/__add-button/__add-button.css');
 @import url('../blocks/elements-grid/elements-grid.css');
 @import url('../blocks/elements-grid/__item-container/elements-grid__item-container.css');
+@import url('../blocks/elements-grid/__image-container/elements-grid__image-container.css');
 @import url('../blocks/elements-grid/__item-image/elements-grid__item-image.css');
+@import url('../blocks/elements-grid/__item-delete/elements-grid__item-delete.css');
 @import url('../blocks/elements-grid/__item-caption/elements-grid__item-caption.css');
 @import url('../blocks/elements-grid/__item-text/elements-grid__item-text.css');
 @import url('../blocks/elements-grid/__item-like/elements-grid__item-like.css');

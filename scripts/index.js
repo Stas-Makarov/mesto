@@ -33,6 +33,13 @@ function renderItem(el) {
     newElement.querySelector('.elements-grid__item-image').alt = el.name;
     newElement.querySelector('.elements-grid__item-text').textContent = el.name;
     cards.append(newElement);
+    const deleteButton = newElement.querySelector('.elements-grid__item-delete');
+    deleteButton.addEventListener('click', deleteCard);
+}
+
+function deleteCard (evt) {
+    const listItem = evt.target.closest('.elements-grid__item-container');
+    listItem.remove();
 }
 
 function render() {
@@ -61,6 +68,7 @@ function openEditProfile() {
     
     const popupCloseButton = newElement.querySelector('.popup__close');
     popupCloseButton.addEventListener('click', closePopup);
+    form.addEventListener('submit', formSubmitHandler);
 
     popup.classList.add('popup_opened');
     popup.innerHTML = '';
@@ -79,6 +87,9 @@ function openAddCard() {
     
     const popupCloseButton = newElement.querySelector('.popup__close');
     popupCloseButton.addEventListener('click', closePopup);
+    form.addEventListener('submit', handleNewItemSubmit);
+
+
 
     popup.classList.add('popup_opened');
     popup.innerHTML = '';
@@ -98,7 +109,7 @@ const itemsList = document.querySelector('.elements-grid');
 
 function activeLikeButton(evt) {
     const target = evt.target; 
-    if (target.classList.contains('elements-grid__item-like')) {
+    if (target.classList.contains('.elements-grid__item-like')) {
         target.classList.toggle('elements-grid__item-like_active');
     }
 };
@@ -108,8 +119,6 @@ itemsList.addEventListener('click', activeLikeButton);
 
 
 // редактирование профиля
-const popupSaveButton = templatePopup.querySelector('.popup__save-button');
-
 function formSubmitHandler(evt) {
     evt.preventDefault();
     const data = new FormData(evt.target);
@@ -118,17 +127,9 @@ function formSubmitHandler(evt) {
     closePopup();
 }
 
-popupSaveButton.addEventListener('submit', formSubmitHandler); 
-
 
 // удаление, добавление карточек
-const deleteButton = document.querySelector('.elements-grid__item-delete');
 
-function deleteCardItem(event) {
-    event.target.closest('.elements-grid__item-container').remove();
-}
-
-deleteButton.addEventListener('click', deleteCardItem);
 
 const createButton = templatePopup.querySelector('.popup__save-button');
 
@@ -140,7 +141,16 @@ function addNewCardItem(link, name) {
     cards.prepend(newElement);
 }
 
-createButton.addEventListener('submit', addNewCardItem);
+function handleNewItemSubmit(evt) {
+    evt.preventDefault();
+    const form = new FormData(evt.target);
+    let name = form.get('name');
+    let link = form.get('job');
+    addNewCardItem(link, name);
+    closePopup();
+
+}
+createButton.addEventListener('click', addNewCardItem);
 
 
 // открытие, закрытие попапов изображений

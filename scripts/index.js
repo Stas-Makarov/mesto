@@ -41,10 +41,9 @@ function render() {
 
 render();
 
-
+//открытие и закрытие попапов редактирования и добавления
 const templatePopup = document.querySelector('#template__popup').content;
 const popup = document.querySelector('.popup');
-//const popupCloseButton = templatePopup.querySelector('.popup__close');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 let name = document.querySelector('.profile__heading-text');
@@ -68,8 +67,6 @@ function openEditProfile() {
     popup.append(newElement);
 }
 
-profileEditButton.addEventListener('click', openEditProfile);
-
 function openAddCard() {
     const newElement = templatePopup.querySelector('.popup__container').cloneNode(true);
     
@@ -88,28 +85,62 @@ function openAddCard() {
     popup.append(newElement);
 }
 
-profileAddButton.addEventListener('click', openAddCard);
-
-
 function closePopup() {
     popup.classList.remove('popup_opened');
 }
 
-//popupCloseButton.addEventListener('click', closePopup);
+profileEditButton.addEventListener('click', openEditProfile);
+profileAddButton.addEventListener('click', openAddCard);
+
+
+// активация лайка
+const itemsList = document.querySelector('.elements-grid');
+
+function activeLikeButton(evt) {
+    const target = evt.target; 
+    if (target.classList.contains('elements-grid__item-like')) {
+        target.classList.toggle('elements-grid__item-like_active');
+    }
+};
+
+itemsList.addEventListener('click', activeLikeButton);
 
 
 
-
-const formElement = templatePopup.querySelector('.popup__form');
-const inputs = formElement.elements;
+// редактирование профиля
+const popupSaveButton = templatePopup.querySelector('.popup__save-button');
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
     const data = new FormData(evt.target);
     name.textContent = data.get('name');
     job.textContent = data.get('job');
-    popupClose();
+    closePopup();
 }
 
+popupSaveButton.addEventListener('submit', formSubmitHandler); 
 
-formElement.addEventListener('submit', formSubmitHandler); 
+
+// удаление, добавление карточек
+const deleteButton = document.querySelector('.elements-grid__item-delete');
+
+function deleteCardItem(event) {
+    event.target.closest('.elements-grid__item-container').remove();
+}
+
+deleteButton.addEventListener('click', deleteCardItem);
+
+const createButton = templatePopup.querySelector('.popup__save-button');
+
+function addNewCardItem(link, name) {
+    const newElement = templateItem.querySelector('.elements-grid__item-container').cloneNode(true);
+    newElement.querySelector('.elements-grid__item-image').src = link;
+    newElement.querySelector('.elements-grid__item-image').alt = link;
+    newElement.querySelector('.elements-grid__item-text').textContent = name;
+    cards.prepend(newElement);
+}
+
+createButton.addEventListener('submit', addNewCardItem);
+
+
+// открытие, закрытие попапов изображений

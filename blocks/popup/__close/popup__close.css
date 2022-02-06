@@ -9,10 +9,10 @@
     border: 0;
     background-color: #0000;
     background-size: cover;
-    cursor: pointer;
 }
 
 .popup__close:hover {
+    cursor: pointer;
     opacity: 0.6;
     transition: opacity, .3s;
 }

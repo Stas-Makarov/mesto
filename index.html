@@ -30,13 +30,40 @@
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <div class="popup"></div>
-    <div class="image-popup"></div>
+    <div class="popup popup_js_profile">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h3 class="popup__title">Редактировать</h3>
+        <form class="popup__form" name="form">
+          <input class="popup__form-item" type="text" name="name">     
+          <input class="popup__form-item" type="text" name="job">
+          <button class="popup__save-button" type="submit">Сохранить</button>
+        </form> 
+      </div>
+    </div>
+    <div class="popup popup_js-card">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h3 class="popup__title">Новое место</h3>
+        <form class="popup__form" name="form">
+          <input class="popup__form-item" type="text" name="name" placeholder="Название">     
+          <input class="popup__form-item" type="text" name="link" placeholder="Ссылка на страницу">
+          <button class="popup__save-button" type="submit">Создать</button>
+        </form> 
+      </div>
+    </div>
+    <div class="popup popup_js-image">
+      <div class="popup__container-image">
+        <button class="popup__close" type="button"></button>  
+        <img class="popup__item-image">
+        <h3 class="popup__item-caption"></h3>
+      </div>
+    </div>
     <template id="template__item">
       <li class="elements-grid__item-container">
         <div class="elements-grid__image-container">
           <img class="elements-grid__item-image">
-          <button class="elements-grid__item-delete" type="reset"></button>
+          <button class="elements-grid__item-delete" type="button"></button>
         </div>
         <div class="elements-grid__item-caption">
           <h2 class="elements-grid__item-text"></h2>
@@ -44,25 +71,8 @@
         </div>
       </li>
     </template>
-    <template id="template__popup">
-      <div class="popup__container">
-        <button class="popup__close" type="button"></button>
-        <h3 class="popup__title"></h3>
-        <form class="popup__form" name="form">
-          <input class="popup__form-item" type="text" name="name">     
-          <input class="popup__form-item" type="text" name="job">
-          <button class="popup__save-button" type="submit"></button>
-        </form> 
-      </div>  
-    </template>
-    <template id="template__image-popup">
-      <div class="image-popup__container">
-        <button class="image-popup__close" type="button"></button>
-        <img class="image-popup__item-image">
-        <h3 class="image-popup__item-caption"></h3>
-      </div>
-    </template>
   </div>
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

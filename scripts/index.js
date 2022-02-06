@@ -3,8 +3,8 @@ const cards = document.querySelector('.elements-grid');
 const popup = document.querySelector('.popup');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
-let name = document.querySelector('.profile__heading-text');
-let job = document.querySelector('.profile__paragraph-text');
+const name = document.querySelector('.profile__heading-text');
+const job = document.querySelector('.profile__paragraph-text');
 const itemsList = document.querySelector('.elements-grid');
 const profilePopup = document.querySelector('.popup_js_profile');
 const imagePopup = document.querySelector('.popup_js-image');
@@ -22,7 +22,8 @@ function createCardElement(card) {
   imageElement.addEventListener('click', function (evt) {
     openImagePopup(card.link, card.name);
   });
-
+  itemsList.addEventListener('click', likeButtonClickHandler);
+  
   return cardElement;
 }
 
@@ -124,7 +125,6 @@ function newCardSubmitHandler(evt) {
   });
 
   cards.prepend(cardElement);
-
   closePopup(cardPopup);
 
 }
@@ -138,5 +138,5 @@ bindProfilePopupEvents();
 profileAddButton.addEventListener('click', addCardClickHandler);
 bindCardPopupEvents();
 
-itemsList.addEventListener('click', likeButtonClickHandler);
+//itemsList.addEventListener('click', likeButtonClickHandler);
 bindImagePopupEvents();

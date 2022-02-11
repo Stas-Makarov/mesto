@@ -1,0 +1,7 @@
+.popup__form-item-error {
+    color: #FF3333;
+    font-size: 0.8em;
+    transition: .3s;
+    padding: 0;
+    /*opacity: 0;*/
+}

@@ -72,7 +72,7 @@ function bindProfilePopupEvents() {
 }
 
 function profileButtonClickHandler() {
-  const profileName = profilePopup.querySelector('.popup__form-item_type_name');
+  const profileName = profilePopup.querySelector('.popup__form-item_type_person-name');
   const profileJob = profilePopup.querySelector('.popup__form-item_type_job');
   profileName.value = name.textContent;
   profileJob.value = job.textContent;
@@ -114,7 +114,7 @@ function newCardSubmitHandler(evt) {
   evt.preventDefault();
 
   const form = new FormData(evt.target);
-  const name = form.get('name');
+  const name = form.get('place-name');
   const link = form.get('link');
   
   renderItem({

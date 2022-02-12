@@ -28,21 +28,29 @@ const checkButtonValidity = (form, button) => {
 }
 
 function enableValidation () {
-    const form = document.querySelector('.popup__form');
+    const formList = Array.from(document.querySelectorAll('.popup__form'));
+        
+    formList.forEach((item) => {
+        item.addEventListener('submit', formSubmit);
+        
+        const inputs = item.querySelectorAll('.popup__form-item');
+        const button = item.querySelector('.popup__save-button');
 
-    form.addEventListener('submit', formSubmit);
-
-    const inputs = form.querySelectorAll('.popup__form-item');
-    const button = form.querySelector('.popup__save-button');
-
-    //checkButtonValidity(form, button);
+        checkButtonValidity(item, button);
 
     inputs.forEach(input => {
         input.addEventListener('input', () => {
-            checkInputValidity(form, input);
-            checkButtonValidity(form, button);
+            checkInputValidity(item, input);
+            checkButtonValidity(item, button);
         });
     })
+    });
+
+    
 }
+
+
+
+
 
 enableValidation();

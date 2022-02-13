@@ -65,7 +65,7 @@ function keyCloseHandler (evt) {
 };
 
 function ClickOverlaykHandler (evt) {
-  if (evt.target !== popup.querySelector('.popup__container') && popup.contains(evt.target)) {                    
+  if (evt.currentTarget !== popup.querySelector('.popup_container') && evt.target === popup) {                    
     popup.classList.remove('popup_opened');
  }
 }

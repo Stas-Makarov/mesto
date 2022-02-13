@@ -43,14 +43,8 @@ function enableValidation () {
             checkInputValidity(item, input);
             checkButtonValidity(item, button);
         });
-    })
     });
-
-    
+});   
 }
-
-
-
-
 
 enableValidation();

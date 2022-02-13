@@ -35,7 +35,7 @@ function enableValidation () {
         
         const inputs = item.querySelectorAll('.popup__form-item');
         const button = item.querySelector('.popup__save-button');
-
+        
         checkButtonValidity(item, button);
 
     inputs.forEach(input => {
@@ -46,5 +46,6 @@ function enableValidation () {
     });
 });   
 }
+
 
 enableValidation();

@@ -48,26 +48,28 @@ function deleteCard(evt) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyCloseHandler);
   popup.removeEventListener("click", ClickOverlaykHandler);
+  document.removeEventListener('keydown', escPressHandler);
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', keyCloseHandler);
   popup.addEventListener("click", ClickOverlaykHandler);
+  document.addEventListener('keydown', escPressHandler);
 }
 
-function keyCloseHandler (evt) {
+function escPressHandler(evt) {
   if (evt.key === 'Escape') {
-    popup.classList.remove('popup_opened');
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
-};
+}
 
 function ClickOverlaykHandler (evt) {
-  if (evt.currentTarget !== popup.querySelector('.popup_container') && evt.target === popup) {                    
-    popup.classList.remove('popup_opened');
- }
+  if (evt.target === evt.currentTarget) {
+    const popup = evt.currentTarget;
+    closePopup(popup);
+  }
 }
 
 function openImagePopup(imageUrl, caption) {
@@ -84,7 +86,9 @@ function bindProfilePopupEvents() {
   popupCloseButton.addEventListener('click', function() {
     closePopup(profilePopup);
   });
-  form.addEventListener('submit', formSubmitHandler);
+  form.addEventListener('submit', function(evt) {
+    formSubmitHandler(evt);
+  });
 }
 
 function profileButtonClickHandler() {
@@ -121,7 +125,7 @@ function formSubmitHandler(evt) {
   evt.preventDefault();
 
   const data = new FormData(evt.target);
-  name.textContent = data.get('name');
+  name.textContent = data.get('person-name');
   job.textContent = data.get('job');
   closePopup(profilePopup);
 }

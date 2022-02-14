@@ -5,7 +5,7 @@ const formSubmit = (event) => {
 }
 
 const checkInputValidity = (config, form, input) => {
-    const errorMessage = form.querySelector(`.popup__form-item_type_${input.name}-error`);
+    const errorMessage = form.querySelector(`.popup__form-item-error_type_${input.name}`);
     
     if (input.validity.valid) {
         errorMessage.textContent = '';

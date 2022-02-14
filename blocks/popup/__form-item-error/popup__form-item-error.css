@@ -1,7 +1,9 @@
 .popup__form-item-error {
-    color: #FF3333;
-    font-size: 0.8em;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
     transition: .3s;
     padding: 0;
-    /*opacity: 0;*/
+    margin: 0;
 }

@@ -4,48 +4,53 @@ const formSubmit = (event) => {
     event.preventDefault();
 }
 
-const checkInputValidity = (form, input) => {
+const checkInputValidity = (config, form, input) => {
     const errorMessage = form.querySelector(`.popup__form-item_type_${input.name}-error`);
-    console.log(errorMessage);
+    
     if (input.validity.valid) {
         errorMessage.textContent = '';
-        input.classList.remove('popup__form-item_type_error');
+        input.classList.remove(config.inputErrorClass);
     } else {
         errorMessage.textContent = input.validationMessage;
-        input.classList.add('popup__form-item_type_error');
+        input.classList.add(config.inputErrorClass);
     }
 }
 
-const checkButtonValidity = (form, button) => {
+const checkButtonValidity = (config, form, button) => {
     if (form.checkValidity()) {
         button.removeAttribute('disabled');
-        button.classList.remove('popup__save-button_disabled');
+        button.classList.remove(config.disabledButtonClass);
     } else {
         button.setAttribute('disabled', '');
-        button.classList.add('popup__save-button_disabled');
+        button.classList.add(config.disabledButtonClass);
     }
 
 }
 
-function enableValidation () {
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
+function enableValidation (config) {
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
         
     formList.forEach((item) => {
         item.addEventListener('submit', formSubmit);
         
-        const inputs = item.querySelectorAll('.popup__form-item');
-        const button = item.querySelector('.popup__save-button');
+        const inputs = item.querySelectorAll(config.inputSelector);
+        const button = item.querySelector(config.buttonSelector);
         
-        checkButtonValidity(item, button);
+        checkButtonValidity(config, item, button);
 
     inputs.forEach(input => {
         input.addEventListener('input', () => {
-            checkInputValidity(item, input);
-            checkButtonValidity(item, button);
+            checkInputValidity(config, item, input);
+            checkButtonValidity(config, item, button);
         });
     });
 });   
 }
 
-
-enableValidation();
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__form-item',
+    inputErrorClass: 'popup__form-item_type_error',
+    buttonSelector: '.popup__save-button',
+    disabledButtonClass: 'popup__save-button_disabled',
+});

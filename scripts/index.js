@@ -7,9 +7,15 @@ const name = document.querySelector('.profile__heading-text');
 const job = document.querySelector('.profile__paragraph-text');
 const itemsList = document.querySelector('.elements-grid');
 const profilePopup = document.querySelector('.popup_type_add-profile');
+
 const imagePopup = document.querySelector('.popup_type_add-image');
 const cardPopup = document.querySelector('.popup_type_add-card'); 
 const popupCloseButton = imagePopup.querySelector('.popup__close');
+
+const profileName = profilePopup.querySelector('.popup__form-item_type_person-name');
+const profileJob = profilePopup.querySelector('.popup__form-item_type_job');
+profileName.value = name.textContent;
+profileJob.value = job.textContent;
 
 function createCardElement(card) {
   const cardElement = templateItem.querySelector('.elements-grid__item-container').cloneNode(true);
@@ -92,10 +98,6 @@ function bindProfilePopupEvents() {
 }
 
 function profileButtonClickHandler() {
-  const profileName = profilePopup.querySelector('.popup__form-item_type_person-name');
-  const profileJob = profilePopup.querySelector('.popup__form-item_type_job');
-  profileName.value = name.textContent;
-  profileJob.value = job.textContent;
   openPopup(profilePopup);
 }
 

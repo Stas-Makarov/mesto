@@ -16,7 +16,7 @@ const checkButtonValidity = (config, form, button) => {
         button.removeAttribute('disabled');
         button.classList.remove(config.disabledButtonClass);
     } else {
-        button.setAttribute('disabled', '');
+        button.setAttribute('disabled', ''); 
         button.classList.add(config.disabledButtonClass);
     }
 }
@@ -28,9 +28,7 @@ function enableValidation (config) {
         const inputs = item.querySelectorAll(config.inputSelector);
         const button = item.querySelector(config.buttonSelector);
         
-        checkButtonValidity(config, item, button);
-
-        const form = document.querySelector(config.formSelector);    
+        checkButtonValidity(config, item, button);   
 
         inputs.forEach(input => {
         input.addEventListener('input', () => {
@@ -40,3 +38,11 @@ function enableValidation (config) {
     });
 });   
 }
+
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__form-item',
+    inputErrorClass: 'popup__form-item_type_error',
+    buttonSelector: '.popup__save-button',
+    disabledButtonClass: 'popup__save-button_disabled',
+});

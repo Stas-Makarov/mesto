@@ -62,16 +62,6 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   popup.addEventListener("click", clickOverlaykHandler);
   document.addEventListener('keydown', escPressHandler);
-  
-  resetErrors(popup);
-
-  enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__form-item',
-    inputErrorClass: 'popup__form-item_type_error',
-    buttonSelector: '.popup__save-button',
-    disabledButtonClass: 'popup__save-button_disabled',
-});
 }
 
 function escPressHandler(evt) {
@@ -111,12 +101,13 @@ function profileButtonClickHandler() {
   const profileJob = profilePopup.querySelector('.popup__form-item_type_job');
   profileName.value = name.textContent;
   profileJob.value = job.textContent;
-  
+  resetErrors(profilePopup);
+  checkButtonDisabled(profilePopup);
   openPopup(profilePopup);
 }
 
 function resetErrors(popup) {
-  
+
   const errorsList = popup.querySelectorAll('.popup__form-item-error');
   errorsList.forEach((element) => {
     element.textContent = '';
@@ -126,6 +117,18 @@ function resetErrors(popup) {
   errorTypeElement.forEach((element) => {
     element.classList.remove('popup__form-item_type_error');
   });
+}
+
+function checkButtonDisabled (popup) {
+  const popupForm = popup.querySelector('.popup__form');
+  const button = popup.querySelector('.popup__save-button');
+  if (popupForm.checkValidity()) {
+      button.disabled = false;
+      button.classList.remove('popup__save-button_disabled');
+  } else {
+      button.disabled = true; 
+      button.classList.add('popup__save-button_disabled');
+  }
 }
 
 function bindCardPopupEvents() {
@@ -138,6 +141,8 @@ function bindCardPopupEvents() {
 
 function addCardClickHandler() {
   cardPopupForm.reset();
+  resetErrors(cardPopup);
+  checkButtonDisabled(cardPopup);
   openPopup(cardPopup);
 }
 

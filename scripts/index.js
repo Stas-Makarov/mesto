@@ -1,3 +1,5 @@
+import { FormValidator } from './FormValidator.js'
+
 const templateItem = document.querySelector('#card-template').content;
 const cards = document.querySelector('.elements-grid');
 const popup = document.querySelector('.popup');
@@ -11,7 +13,25 @@ const imagePopup = document.querySelector('.popup_type_add-image');
 const cardPopup = document.querySelector('.popup_type_add-card'); 
 const popupCloseButton = imagePopup.querySelector('.popup__close');
 const cardPopupForm = cardPopup.querySelector('.popup__form');
+const profilePopupForm = profilePopup.querySelector('.popup__form');
 const imageElement = document.querySelector('.popup__item-image');
+
+
+const validateConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-item',
+  inputErrorClass: 'popup__form-item_type_error',
+  buttonSelector: '.popup__save-button',
+  disabledButtonClass: 'popup__save-button_disabled',
+}
+
+const cardValidator = new FormValidator(validateConfig, cardPopupForm);
+const editValidator = new FormValidator(validateConfig, profilePopupForm);
+
+cardValidator.enableValidation();
+editValidator.enableValidation();
+
+
 
 function createCardElement(card) {
   const cardElement = templateItem.querySelector('.elements-grid__item-container').cloneNode(true);

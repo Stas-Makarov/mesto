@@ -1,40 +1,38 @@
 export class FormValidator {
     constructor(settings, form) {
-        this.settings = settings;
-        this.form = form;
-        this.button = this.form.querySelector(this.settings.buttonSelector);
+        this._settings = settings;
+        this._form = form;
+        this._button = this._form.querySelector(this._settings.buttonSelector);
     }
 
-    _checkInputValidity (input) {
-        const errorMessage = this.form.querySelector(`.popup__form-item-error_type_${input.name}`);
+    _checkInputValidity(input) {
+        const errorMessage = this._form.querySelector(`.popup__form-item-error_type_${input.name}`);
         
         if (input.validity.valid) {
             errorMessage.textContent = '';
-            input.classList.remove(this.settings.inputErrorClass);
+            input.classList.remove(this._settings.inputErrorClass);
         } else {
             errorMessage.textContent = input.validationMessage;
-            input.classList.add(this.settings.inputErrorClass);
+            input.classList.add(this._settings.inputErrorClass);
         }
     }
     
     _checkButtonValidity () {
-        if (this.form.checkValidity()) {
-            this.button.removeAttribute('disabled');
-            this.button.classList.remove(this.settings.disabledButtonClass);
+        if (this._form.checkValidity()) {
+            this._button.removeAttribute('disabled');
+            this._button.classList.remove(this._settings.disabledButtonClass);
         } else {
-            this.button.setAttribute('disabled', ''); 
-            this.button.classList.add(this.settings.disabledButtonClass);
+            this._button.setAttribute('disabled', ''); 
+            this._button.classList.add(this._settings.disabledButtonClass);
         }
     }
 
     enableValidation () { 
-        const formList = Array.from(document.querySelectorAll(this.settings.formSelector));
+        const formList = Array.from(document.querySelectorAll(this._settings.formSelector));
         
         formList.forEach((item) => {
-            const inputs = item.querySelectorAll(this.settings.inputSelector);       
-
-            //this._checkButtonValidity(this.button);   
-    
+            const inputs = item.querySelectorAll(this._settings.inputSelector);       
+   
             inputs.forEach(input => {
                 input.addEventListener('input', () => {
                     this._checkInputValidity(input);

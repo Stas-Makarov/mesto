@@ -28,16 +28,12 @@ export class FormValidator {
     }
 
     enableValidation () { 
-        const formList = Array.from(document.querySelectorAll(this._settings.formSelector));
-        
-        formList.forEach((item) => {
-            const inputs = item.querySelectorAll(this._settings.inputSelector);       
+        const inputs = this._form.querySelectorAll(this._settings.inputSelector);       
    
-            inputs.forEach(input => {
-                input.addEventListener('input', () => {
-                    this._checkInputValidity(input);
-                    this._checkButtonValidity(this.button);
-                });
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                this._checkInputValidity(input);
+                this._checkButtonValidity(this.button);
             });
         });
     }

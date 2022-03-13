@@ -46,6 +46,7 @@ const validateConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-item',
   inputErrorClass: 'popup__form-item_type_error',
+  errorMessageClass: 'popup__form-item-error_opened',
   buttonSelector: '.popup__save-button',
   disabledButtonClass: 'popup__save-button_disabled',
 }

@@ -1,4 +1,5 @@
 .popup__form-item-error {
+    display: inline-block;
     font-weight: normal;
     font-size: 12px;
     line-height: 15px;

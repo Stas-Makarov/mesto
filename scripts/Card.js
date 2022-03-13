@@ -5,22 +5,21 @@ export class Card {
         this._handelImageClick = handelImageClick;
     }
 
-    _deleteCard(evt) {
-        const listItem = evt.target.closest('.elements-grid__item-container');
-        listItem.remove();
+    _deleteCard = () => {
+        this._cardElement.remove();
+        this._cardElement = null;
     }
 
-    _likeButtonClickHandler(evt) {
-        const target = evt.target;
-        target.classList.toggle('elements-grid__item-like_active');
+    _likeButtonClickHandler = () => {
+        this._likeButton.classList.toggle('elements-grid__item-like_active');
     };
 
     _setEventListeners() {
-        const deleteButton = this._cardElement.querySelector('.elements-grid__item-delete');
-        const likeButton = this._cardElement.querySelector('.elements-grid__item-like');
+        this._deleteButton = this._cardElement.querySelector('.elements-grid__item-delete');
+        this._likeButton = this._cardElement.querySelector('.elements-grid__item-like');
 
-        deleteButton.addEventListener('click', this._deleteCard);  
-        likeButton.addEventListener('click', this._likeButtonClickHandler);
+        this._deleteButton.addEventListener('click', this._deleteCard);  
+        this._likeButton.addEventListener('click', this._likeButtonClickHandler);
         this._imageElement.addEventListener('click', this._handelImageClick);
     }
 

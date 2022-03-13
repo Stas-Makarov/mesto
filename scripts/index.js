@@ -28,7 +28,7 @@ const initialCards = [
   }
 ];
 
-const cards = document.querySelector('.elements-grid');
+const cardsList = document.querySelector('.elements-grid');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const name = document.querySelector('.profile__heading-text');
@@ -52,24 +52,21 @@ const validateConfig = {
 }
 
 const cardValidator = new FormValidator(validateConfig, cardPopupForm);
-const editValidator = new FormValidator(validateConfig, profilePopupForm);
+const profileValidator = new FormValidator(validateConfig, profilePopupForm);
 
 cardValidator.enableValidation();
-editValidator.enableValidation();
+profileValidator.enableValidation();
 
 
-function renderItem(data, toBeginning = true) {
+function render(data, toBeginning = true, wrapPlace) {
   const card = new Card(data, '#card-template', () => openImagePopup(data));
   const cardElement = card.createCardElement();
-    if (toBeginning) {
-      cards.prepend(cardElement);
-    } else {
-      cards.append(cardElement);
-    }
-}
-
-function render() {
-  initialCards.forEach((data) => renderItem(data, false));
+ 
+  if (toBeginning) {
+    wrapPlace.append(cardElement);
+  } else {
+    wrapPlace.prepend(cardElement);
+  }
 }
 
 function closePopup(popup) {
@@ -121,34 +118,8 @@ function profileButtonClickHandler() {
   const profileJob = profilePopup.querySelector('.popup__form-item_type_job');
   profileName.value = name.textContent;
   profileJob.value = job.textContent;
-  resetErrors(profilePopup);
-  checkButtonDisabled(profilePopup);
+  profileValidator.resetValidation();
   openPopup(profilePopup);
-}
-
-function resetErrors(popup) {
-
-  const errorsList = popup.querySelectorAll('.popup__form-item-error');
-  errorsList.forEach((element) => {
-    element.textContent = '';
-  });
-  
-  const errorTypeElement = popup.querySelectorAll('.popup__form-item');
-  errorTypeElement.forEach((element) => {
-    element.classList.remove('popup__form-item_type_error');
-  });
-}
-
-function checkButtonDisabled (popup) {
-  const popupForm = popup.querySelector('.popup__form');
-  const button = popup.querySelector('.popup__save-button');
-  if (popupForm.checkValidity()) {
-      button.disabled = false;
-      button.classList.remove('popup__save-button_disabled');
-  } else {
-      button.disabled = true; 
-      button.classList.add('popup__save-button_disabled');
-  }
 }
 
 function bindCardPopupEvents() {
@@ -161,8 +132,7 @@ function bindCardPopupEvents() {
 
 function addCardClickHandler() {
   cardPopupForm.reset();
-  resetErrors(cardPopup);
-  checkButtonDisabled(cardPopup);
+  cardValidator.resetValidation();
   openPopup(cardPopup);
 }
 
@@ -182,15 +152,17 @@ function newCardSubmitHandler(evt) {
   const name = form.get('place-name');
   const link = form.get('link');
   
-  renderItem({
-    link,
-    name
-  });
+  render({
+      link,
+      name
+    }, false, cardsList);
 
   closePopup(cardPopup);
 }
 
-render();
+initialCards.forEach((data) => {
+  render(data, true, cardsList);
+})
 
 profileEditButton.addEventListener('click', profileButtonClickHandler);
 bindProfilePopupEvents();

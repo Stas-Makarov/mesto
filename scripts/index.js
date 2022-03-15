@@ -28,7 +28,7 @@ const initialCards = [
   }
 ];
 
-const cardsList = document.querySelector('.elements-grid');
+const cardsContainer = document.querySelector('.elements-grid');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const name = document.querySelector('.profile__heading-text');
@@ -57,10 +57,15 @@ const profileValidator = new FormValidator(validateConfig, profilePopupForm);
 cardValidator.enableValidation();
 profileValidator.enableValidation();
 
-
-function render(data, toBeginning = true, wrapPlace) {
+function createCard(data) {
   const card = new Card(data, '#card-template', () => openImagePopup(data));
   const cardElement = card.createCardElement();
+  
+  return cardElement;
+}
+
+function render(data, toBeginning = true, wrapPlace) {
+  const cardElement = createCard(data);
  
   if (toBeginning) {
     wrapPlace.append(cardElement);
@@ -155,13 +160,13 @@ function newCardSubmitHandler(evt) {
   render({
       link,
       name
-    }, false, cardsList);
+    }, false, cardsContainer);
 
   closePopup(cardPopup);
 }
 
 initialCards.forEach((data) => {
-  render(data, true, cardsList);
+  render(data, true, cardsContainer);
 })
 
 profileEditButton.addEventListener('click', profileButtonClickHandler);

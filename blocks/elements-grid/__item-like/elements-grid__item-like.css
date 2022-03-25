@@ -2,7 +2,7 @@
     display: flex;
     width: 22px;
     height: 19px;
-    background-image: url('../../../images/сердце.svg');
+    background-image: url('../../../src/images/сердце.svg');
     background-size: cover;
     border: none;
     background-color: transparent;

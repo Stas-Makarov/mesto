@@ -1,5 +1,5 @@
 .elements-grid__item-delete {
-    background-image: url('../../../images/корзина.svg');
+    background-image: url('../../../src/images/корзина.svg');
     position: absolute;
     margin: 0;
     padding: 0;

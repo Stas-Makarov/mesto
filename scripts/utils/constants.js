@@ -37,12 +37,7 @@ export const name = document.querySelector('.profile__heading-text');
 export const job = document.querySelector('.profile__paragraph-text');
 export const popupCloseButton = document.querySelector('.popup__close');
 
-
-//export const popupCloseButton = imagePopup.querySelector('.popup__close');
-//export const cardPopupForm = cardPopup.querySelector('.popup__form');
-//export const profilePopupForm = profilePopup.querySelector('.popup__form');
-//export const imageElement = document.querySelector('.popup__item-image');
-  
+ 
   
 export const validateConfig = {
     formSelector: '.popup__form',

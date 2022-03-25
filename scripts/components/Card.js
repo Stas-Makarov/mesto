@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
     constructor (data, cardTemplateSelector, handelImageClick) {
         this._data = data;
         this._templateItem = document.querySelector(cardTemplateSelector).content;

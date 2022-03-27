@@ -3,7 +3,6 @@ export default class Section {
         this._renderedItems = data;
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
-        this.renderItems();
     }
 
     addItem(element, toBeginning=true) {
@@ -16,8 +15,7 @@ export default class Section {
 
     renderItems() {
       this._renderedItems.forEach(item => {
-        const cardElement = this._renderer(item);
-        this.addItem(cardElement, true);
+        this._renderer(item);        
       });
     }
 }

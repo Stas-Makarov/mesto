@@ -8,15 +8,11 @@ export default class Popup {
     open() {
         this._popup.classList.add('popup_opened');
         document.addEventListener('keydown', this._handleEscClose);
-        this._popup.addEventListener("click", this._handleClickOverlay);
-        this._popupCloseButton.addEventListener('click', this._handleButtonClose);
     }
 
     close() {
         this._popup.classList.remove('popup_opened');
         document.removeEventListener('keydown', this._handleEscClose);
-        this._popup.removeEventListener("click", this._handleClickOverlay);
-        this._popupCloseButton.removeEventListener('click', this._handleButtonClose);
     }
 
     _handleEscClose = (evt) => {
@@ -26,13 +22,17 @@ export default class Popup {
     }
 
     _handleClickOverlay = (evt) => {
-        if (evt.target === evt.currentTarget) {
-            this._popup = evt.currentTarget;
+        if (evt.target === this._popup) {
             this.close();
           }
     }
 
     _handleButtonClose = () => {
         this.close();
+    }
+
+    setEventListeners() {
+        this._popup.addEventListener("click", this._handleClickOverlay);
+        this._popupCloseButton.addEventListener('click', this._handleButtonClose);
     }
 }

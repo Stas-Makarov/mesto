@@ -10,14 +10,14 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main.js',
-            publicPath: ''
-      },
-      mode: 'development',
+        publicPath: ''
+    },
+    mode: 'development',
+    devtool:  'eval',
     devServer: {
         static: path.resolve(__dirname, './dist'), 
         compress: true, 
-        port: 8080, 
-
+        port: 8080,
         open: true 
     },
     module: {

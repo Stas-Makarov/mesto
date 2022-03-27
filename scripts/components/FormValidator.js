@@ -3,7 +3,7 @@ export default class FormValidator {
         this._settings = settings;
         this._form = form;
         this._button = this._form.querySelector(this._settings.buttonSelector);
-        this._inputList = this._form.querySelectorAll(this._settings.inputSelector);       
+        this._inputList = this._form.querySelectorAll(this._settings.inputSelector);
     }
 
     _showInputError(input) {

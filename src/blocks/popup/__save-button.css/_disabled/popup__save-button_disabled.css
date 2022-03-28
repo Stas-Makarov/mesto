@@ -4,3 +4,7 @@
     color: #000000;
     opacity: .2;
 }
+
+.popup__save-button_disabled:hover {
+    cursor: default;
+}

@@ -19,7 +19,9 @@
 @import url('../blocks/elements-grid/__item-delete/elements-grid__item-delete.css');
 @import url('../blocks/elements-grid/__item-caption/elements-grid__item-caption.css');
 @import url('../blocks/elements-grid/__item-text/elements-grid__item-text.css');
+@import url('../blocks/elements-grid/__item-like-container/elements-grid__item-like-container.css');
 @import url('../blocks/elements-grid/__item-like/elements-grid__item-like.css');
+@import url('../blocks/elements-grid/__item-like-counter/elements-grid__item-like-counter.css');
 @import url('../blocks/elements-grid/__item-like/_active/elements-grid__item-like_active.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');

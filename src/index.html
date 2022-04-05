@@ -62,6 +62,26 @@
         <h3 class="popup__item-caption"></h3>
       </div>
     </div>
+    <div class="popup popup_type_confirm">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h3 class="popup__title">Вы уверены?</h3>
+        <form class="popup__form" name="profile-form" novalidate>
+          <button class="popup__save-button" type="submit">Да</button>
+        </form> 
+      </div>
+    </div>
+    <div class="popup popup_type_add-avatar">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <form class="popup__form" name="profile-form" novalidate>
+          <input class="popup__form-item popup__form-item_type_link" type="url" name="link" placeholder="Ссылка на страницу" autocomplete="off" required>
+          <span class="popup__form-item-error popup__form-item-error_type_link"></span>
+          <button class="popup__save-button" type="submit">Сохранить</button>
+        </form> 
+      </div>
+    </div>
     <template id="card-template">
       <li class="elements-grid__item-container">
         <div class="elements-grid__image-container">
@@ -70,7 +90,10 @@
         </div>
         <div class="elements-grid__item-caption">
           <h2 class="elements-grid__item-text"></h2>
-          <button class="elements-grid__item-like" type="button"></button>
+          <div class="elements-grid__item-like-container">
+            <button class="elements-grid__item-like" type="button"></button>
+            <p class="elements-grid__item-like-counter">0</p>
+          </div>
         </div>
       </li>
     </template>

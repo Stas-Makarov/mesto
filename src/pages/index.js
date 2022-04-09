@@ -5,29 +5,74 @@ import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import {
-  initialCards,
-  cardsContainerSelector,
-  profilePopupSelector,
-  imagePopupSelector,
-  cardPopupSelector,
-  profileEditButton,
-  profileAddButton, 
-  validateConfig
-} from '../scripts/utils/constants.js';
+        settings,
+        cardsContainerSelector,
+        profilePopupSelector,
+        imagePopupSelector,
+        cardPopupSelector,
+        profileEditButton,
+        profileAddButton, 
+        validateConfig,
+        avatarEditButton 
+        } from '../scripts/utils/constants.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithConfirm from '../scripts/components/PopupWithConfirm';
+import Api from '../scripts/components/Api';
 
- const cardSection = new Section({ data: initialCards , renderer: render }, cardsContainerSelector);
- cardSection.renderItems();
+let ownerId = null;
+
+function render(data) {
+  const cardElement = createCard(data);
+  cardSection.addItem(cardElement, true);
+}
+
+const cardSection = new Section({ renderer: render }, cardsContainerSelector);
+
+function initCards(cards) {
+  cardSection.renderItems(cards);
+}
+
+const profileData = new UserInfo({
+  nameSelector: '.profile__heading-text', 
+  jobSelector: '.profile__paragraph-text',
+  avatarSelector: '.profile__avatar'
+});
+
+function initProfile(data) {
+  profileData.setUserInfo(data);
+}
+
+const api = new Api(settings);
+api.getInitialCards()
+  .then(initCards);
+
+api.getUserInfo()
+  .then(initProfile);
+
+ 
 
 const cardPopup = new PopupWithForm(cardPopupSelector, newCardSubmitHandler);
 cardPopup.setEventListeners();
 
+
 const profilePopup = new PopupWithForm(profilePopupSelector, formSubmitHandler);
 profilePopup.setEventListeners();
-const profileData = new UserInfo({
-  nameSelector: '.profile__heading-text', 
-  jobSelector: '.profile__paragraph-text'
-});
+
+
+
+const popupWithConfirm = new PopupWithConfirm('.popup_type_confirm', {
+  api: (id, element) => {
+    api.deletePhoto(id)
+      .then(() => {
+         element.remove(); 
+      })
+      .then(() => {
+        popupWithConfirm.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }}); 
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
 imagePopup.setEventListeners();
@@ -41,11 +86,6 @@ function createCard(data) {
   
   return cardElement;
 }
-
-function render(data) {
-  const cardElement = createCard(data);
-  cardSection.addItem(cardElement, true);
-}
   
 function openImagePopup(data) {
   imagePopup.open(data);
@@ -57,15 +97,22 @@ function addCardClickHandler() {
 }
 
 function newCardSubmitHandler(data) {
-  const name = data['place-name'];
+  const name = data['name'];
   const link = data['link'];
-  
-  const cardElement = createCard({name, link});
-  cardSection.addItem(cardElement, false);
+  api.addNewCard(data)
+    .then(({name, link}) =>{
+      const cardElement = createCard({name, link});
+      cardSection.addItem(cardElement, false);
+    });
 }
 
 function formSubmitHandler(data) {
-  profileData.setUserInfo(data);
+  function profileUpdate(data) {
+    profileData.editUserInfo(data);
+  }
+  
+  api.updateUserInfo(data)
+    .then(profileUpdate(data)); 
 }
 
 function profileButtonClickHandler() { 
@@ -79,6 +126,4 @@ cardValidator.enableValidation();
 profileValidator.enableValidation();
 
 profileEditButton.addEventListener('click', profileButtonClickHandler);
-profileAddButton.addEventListener('click', addCardClickHandler)
-
-
+profileAddButton.addEventListener('click', addCardClickHandler);

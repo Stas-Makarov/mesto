@@ -2,6 +2,12 @@ export default class Card {
     constructor (data, cardTemplateSelector, handelImageClick) {
         this._data = data;
         this._templateItem = document.querySelector(cardTemplateSelector).content;
+
+        // this._api = api
+        // this._id = data._id // id карточки
+        // this._ownerId = data.owner._id // id создателя карточки
+        // this._userId = userId
+
         this._handelImageClick = handelImageClick;
     }
 

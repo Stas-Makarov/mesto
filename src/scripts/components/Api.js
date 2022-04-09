@@ -53,10 +53,7 @@ export default class Api {
           authorization: this._headerAuthorization,
             'Content-Type': this._contentType
         },
-        body: JSON.stringify({
-          name: data.name,
-          link: data.link
-        }) 
+        body: JSON.stringify(data) 
       })
       .then(this._checkResponse);
     }
@@ -79,9 +76,7 @@ export default class Api {
           authorization: this._headerAuthorization,
             'Content-Type': this._contentType
         },
-        body: JSON.stringify({
-          avatar: data.link
-            })
+        body: JSON.stringify(data)
         })
       .then(this._checkResponse);
     }

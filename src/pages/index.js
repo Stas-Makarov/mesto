@@ -14,23 +14,22 @@ import {
         profileAddButton, 
         validateConfig,
         avatarPopupSelector,
-        avatarEditButton 
+        avatarEditButton,
+        confirmPopupSelector 
         } from '../scripts/utils/constants.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithConfirm from '../scripts/components/PopupWithConfirm';
 import Api from '../scripts/components/Api';
 
-let ownerId = null;
-
-function render(data) {
-  const cardElement = createCard(data);
+function render(data, ownerId) {
+  const cardElement = createCard(data, ownerId);
   cardSection.addItem(cardElement, true);
 }
 
 const cardSection = new Section({ renderer: render }, cardsContainerSelector);
 
-function initCards(cards) {
-  cardSection.renderItems(cards);
+function initCards(cards, ownerId) {
+  cardSection.renderItems(cards, ownerId);
 }
 
 const profileData = new UserInfo({
@@ -44,17 +43,18 @@ function initProfile(data) {
 }
 
 const api = new Api(settings);
-api.getInitialCards()
-  .then(initCards);
 
-api.getUserInfo()
-  .then(initProfile);
-
- 
+Promise.all([
+  api.getInitialCards(),
+  api.getUserInfo()
+])
+  .then(([cards, profileInfo]) => {
+    initCards(cards, profileInfo._id);
+    initProfile(profileInfo);
+  });
 
 const cardPopup = new PopupWithForm(cardPopupSelector, newCardSubmitHandler);
 cardPopup.setEventListeners();
-
 
 const profilePopup = new PopupWithForm(profilePopupSelector, formSubmitHandler);
 profilePopup.setEventListeners();
@@ -62,19 +62,8 @@ profilePopup.setEventListeners();
 const avatarPopup = new PopupWithForm(avatarPopupSelector, avatarSubmitHandler);
 avatarPopup.setEventListeners();
 
-const popupWithConfirm = new PopupWithConfirm('.popup_type_confirm', {
-  api: (id, element) => {
-    api.deletePhoto(id)
-      .then(() => {
-         element.remove(); 
-      })
-      .then(() => {
-        popupWithConfirm.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }}); 
+const popupWithConfirm = new PopupWithConfirm(confirmPopupSelector, api); 
+popupWithConfirm.setEventListeners();
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
 imagePopup.setEventListeners();
@@ -83,9 +72,9 @@ const cardValidator = new FormValidator(validateConfig, cardPopup.getForm());
 const profileValidator = new FormValidator(validateConfig, profilePopup.getForm());
 const avatarValidator = new FormValidator(validateConfig, avatarPopup.getForm());
 
-function createCard(data) {
+function createCard(data, ownerId) {
   const card = new Card(data, '#card-template', openImagePopup);
-  const cardElement = card.createCardElement();
+  const cardElement = card.createCardElement(ownerId);
   
   return cardElement;
 }
@@ -126,17 +115,15 @@ function profileButtonClickHandler() {
 }
 
 function avatarSubmitHandler(data) {
-  function updateAvatar(data) {
-    profileData.editUserInfo(data);
+  function updateAva(data) {
+    profileData.avatar.updateAvatar(data);
   }
   
   api.editAvatar(data)
-    .then(updateAvatar(data)); 
+    .then(updateAva(data)); 
 }
 
 function editAvatarClickHandler() {
-  // const data = profileData.getUserInfo();
-  // avatarPopup.setInputValues(data);
   avatarValidator.resetValidation();
   avatarPopup.open();
 }

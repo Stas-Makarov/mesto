@@ -81,15 +81,14 @@ export default class Api {
       .then(this._checkResponse);
     }
   
-    // deletePhoto(id) {
-    //   return fetch(`${this._baseUrl}cards/${id}`, {
-    //     method: 'DELETE',
-    //     headers: {
-    //       authorization: this._headerAuthorization,
-    //         'Content-Type': this._contentType
-    //     }
-  
-    //   })
-    //   .then(this._checkResponse);
-    // }
+    deleteCard(id) {
+      return fetch(`${this._baseUrl}cards/${id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: this._headerAuthorization,
+            'Content-Type': this._contentType
+        }
+      })
+      .then(this._checkResponse);
+    }
   }

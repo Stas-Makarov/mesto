@@ -12,9 +12,9 @@ export default class Section {
           }
     }
 
-    renderItems(items) {
+    renderItems(items, ownerId) {
       items.forEach(item => {
-        this._renderer(item);        
+        this._renderer(item, ownerId);        
       });
     }
 }

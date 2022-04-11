@@ -18,7 +18,6 @@ import {
         confirmPopupSelector 
         } from '../scripts/utils/constants.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import PopupWithConfirm from '../scripts/components/PopupWithConfirm';
 import Api from '../scripts/components/Api';
 
 let ownerId;

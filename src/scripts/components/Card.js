@@ -8,6 +8,29 @@ export default class Card {
         this._handleLikeClick = handleLikeClick;
     }
 
+    createCardElement(ownerId) {
+        this._cardElement = this._templateItem.querySelector('.elements-grid__item-container').cloneNode(true);
+        this._imageElement = this._cardElement.querySelector('.elements-grid__item-image');
+        this._likeCounter = this._cardElement.querySelector('.elements-grid__item-like-counter');
+        
+        this._imageElement.src = this._data.link;
+        this._imageElement.alt = this._data.name;
+        this._cardElement.querySelector('.elements-grid__item-text').textContent = this._data.name;
+        this._likeCounter.textContent = this._data.likes.length;
+      
+        this._setEventListeners();
+        if (this._data.owner._id !== ownerId) {
+            this._deleteButton.remove();
+        }
+
+        if (this.isLiked()) {
+            this._addLikeClass(); 
+        } else {
+            this._deleteLikeClass();
+        }
+        return this._cardElement;
+      }
+
     deleteCard = () => {
         this._cardElement.remove();
         this._cardElement = null;
@@ -45,27 +68,4 @@ export default class Card {
         this._likeButton.addEventListener('click', () => this._handleLikeClick(this._data._id));
         this._imageElement.addEventListener('click', () => this._handelImageClick(this._data));
     }
-
-    createCardElement(ownerId) {
-        this._cardElement = this._templateItem.querySelector('.elements-grid__item-container').cloneNode(true);
-        this._imageElement = this._cardElement.querySelector('.elements-grid__item-image');
-        this._likeCounter = this._cardElement.querySelector('.elements-grid__item-like-counter');
-        
-        this._imageElement.src = this._data.link;
-        this._imageElement.alt = this._data.name;
-        this._cardElement.querySelector('.elements-grid__item-text').textContent = this._data.name;
-        this._likeCounter.textContent = this._data.likes.length;
-      
-        this._setEventListeners();
-        if (this._data.owner._id !== ownerId) {
-            this._deleteButton.remove();
-        }
-
-        if (this.isLiked()) {
-            this._addLikeClass(); 
-        } else {
-            this._deleteLikeClass();
-        }
-        return this._cardElement;
-      }
 }

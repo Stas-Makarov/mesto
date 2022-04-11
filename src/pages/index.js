@@ -75,6 +75,7 @@ const avatarValidator = new FormValidator(validateConfig, avatarPopup.getForm())
 
 function createCard(data, ownerId) {
   const card = new Card(data, 
+                        ownerId,
                         '#card-template', 
                         openImagePopup, 
                         (id) => {
@@ -90,15 +91,23 @@ function createCard(data, ownerId) {
                         (id) => {
                             if (card.isLiked()) {
                               api.deleteLike(id)
-                                .then(res =>{
-                                  card.setLikes(res.likes);
-                                });
-                            } else {
-                              api.putLike(id)
-                                .then(res =>{
-                                  card.setLikes(res.likes);
-                                });
-                            } 
+                                .then((data) => {
+                                  return data.likes.length
+                                })
+                                .then((data) => {
+                                  card.updateLikeCount(data);
+                                })
+                                }
+                               
+                            else {
+                              api.putLike(id)              
+                                .then((data) => {
+                                  return data.likes.length
+                                })
+                                .then((data) => {
+                                  card.updateLikeCount(data);
+                                })
+                              } 
                             }
                         );
   const cardElement = card.createCardElement(ownerId);

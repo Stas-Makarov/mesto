@@ -22,6 +22,10 @@ export default class PopupWithForm extends Popup {
         return this._form;
     }
 
+    setButtonText(text) {
+        this._submitButton.textContent = text;
+    }
+
     changeSubmitHandler(newSubmitHandler) {
         this._handleFormSubmit = newSubmitHandler;
     }

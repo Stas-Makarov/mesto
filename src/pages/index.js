@@ -81,10 +81,12 @@ function createCard(data, ownerId) {
                         (id) => {
                             popupWithConfirm.open();
                             popupWithConfirm.changeSubmitHandler(() =>{
+                            popupWithConfirm.setButtonText('Сохранение...');
                               api.deleteCard(id)
                                 .then(res =>{
                                   card.deleteCard();
                                   popupWithConfirm.close();
+                                  popupWithConfirm.setButtonText('Да');
                                 })
                               }); 
                         },
@@ -127,10 +129,12 @@ function addCardClickHandler() {
 function newCardSubmitHandler(data) {
   const name = data['name'];
   const link = data['link'];
+  cardPopup.setButtonText('Сохранение...');
   api.addNewCard(data)
     .then(({name, link}) =>{
       const cardElement = createCard({name, link});
       cardSection.addItem(cardElement, false);
+      cardPopup.setButtonText('Создать');
     });
 }
 
@@ -138,9 +142,13 @@ function formSubmitHandler(data) {
   function profileUpdate(data) {
     profileData.editUserInfo(data);
   }
-  
+  profilePopup.setButtonText('Сохранение...');
   api.updateUserInfo(data)
-    .then(profileUpdate(data)); 
+    .then(() => {
+      profileUpdate(data)
+      profilePopup.setButtonText('Сохранить');
+    }
+    );  
 }
 
 function profileButtonClickHandler() { 
@@ -150,13 +158,13 @@ function profileButtonClickHandler() {
   profilePopup.open();
 }
 
-function avatarSubmitHandler(data) {
-  function updateAva(data) {
-    profileData.avatar.updateAvatar(data);
-  }
-  
+function avatarSubmitHandler(data) { 
+  avatarPopup.setButtonText('Сохранение...');
   api.editAvatar(data)
-    .then(updateAva(data)); 
+    .then(profileData.updateAvatar(data))
+    .then(() => {
+      avatarPopup.close();
+    })
 }
 
 function editAvatarClickHandler() {

@@ -68,6 +68,17 @@ export default class Api {
       })
       .then(this._checkResponse);
     }
+
+    deleteLike(id) {
+      return fetch(`${this._baseUrl}cards/likes/${id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: this._headerAuthorization,
+            'Content-Type': this._contentType
+        }
+        })
+      .then(this._checkResponse);
+    }
   
     editAvatar(data) {
       return fetch(`${this._baseUrl}users/me/avatar`, {

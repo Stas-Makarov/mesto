@@ -21,6 +21,8 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithConfirm from '../scripts/components/PopupWithConfirm';
 import Api from '../scripts/components/Api';
 
+let ownerId;
+
 function render(data, ownerId) {
   const cardElement = createCard(data, ownerId);
   cardSection.addItem(cardElement, true);
@@ -52,7 +54,7 @@ Promise.all([
     initCards(cards, profileInfo._id);
     initProfile(profileInfo);
   });
-
+ 
 const cardPopup = new PopupWithForm(cardPopupSelector, newCardSubmitHandler);
 cardPopup.setEventListeners();
 
@@ -62,7 +64,7 @@ profilePopup.setEventListeners();
 const avatarPopup = new PopupWithForm(avatarPopupSelector, avatarSubmitHandler);
 avatarPopup.setEventListeners();
 
-const popupWithConfirm = new PopupWithConfirm(confirmPopupSelector, api); 
+const popupWithConfirm = new PopupWithForm(confirmPopupSelector, ); 
 popupWithConfirm.setEventListeners();
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
@@ -73,7 +75,33 @@ const profileValidator = new FormValidator(validateConfig, profilePopup.getForm(
 const avatarValidator = new FormValidator(validateConfig, avatarPopup.getForm());
 
 function createCard(data, ownerId) {
-  const card = new Card(data, '#card-template', openImagePopup);
+  const card = new Card(data, 
+                        '#card-template', 
+                        openImagePopup, 
+                        (id) => {
+                            popupWithConfirm.open();
+                            popupWithConfirm.changeSubmitHandler(() =>{
+                              api.deleteCard(id)
+                                .then(res =>{
+                                  card.deleteCard();
+                                  popupWithConfirm.close();
+                                })
+                              }); 
+                        },
+                        (id) => {
+                            if (card.isLiked()) {
+                              api.deleteLike(id)
+                                .then(res =>{
+                                  card.setLikes(res.likes);
+                                });
+                            } else {
+                              api.putLike(id)
+                                .then(res =>{
+                                  card.setLikes(res.likes);
+                                });
+                            } 
+                            }
+                        );
   const cardElement = card.createCardElement(ownerId);
   
   return cardElement;

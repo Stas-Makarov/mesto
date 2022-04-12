@@ -11,7 +11,7 @@
     padding: 0;
     border: none;
     cursor: pointer;
-    transition: opacity .3s
+    transition: opacity .3s;
 }
 
 .profile__avatar-button:hover {

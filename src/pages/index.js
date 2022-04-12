@@ -143,11 +143,11 @@ function addCardClickHandler() {
   cardPopup.open();
 }
 
-function newCardSubmitHandler(data) {
+function newCardSubmitHandler(data, ownerId) {
   cardPopup.renderLoading(true, 'Создать');
   api.addNewCard(data)
-    .then((data) =>{
-      const cardElement = createCard(data);
+    .then((data) => {
+      const cardElement = createCard(data, ownerId);
       cardSection.addItem(cardElement, false);
     })
     .catch((err) => {

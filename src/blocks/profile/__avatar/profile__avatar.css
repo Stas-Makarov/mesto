@@ -4,12 +4,9 @@
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
+    transition: opacity .3s;
 }
 
 .profile__avatar:hover {
-    background-image: url('../../../images/карандаш.авы.svg');
-    background-position: center;
-    background-size: 26px;
-    opacity: 0.2;
-    transition: opacity, .3s;
+    opacity: .2;
 }

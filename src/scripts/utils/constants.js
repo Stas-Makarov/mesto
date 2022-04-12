@@ -18,7 +18,7 @@ export const profileAddButton = document.querySelector('.profile__add-button');
 export const name = document.querySelector('.profile__heading-text');
 export const job = document.querySelector('.profile__paragraph-text');
 export const popupCloseButton = document.querySelector('.popup__close');
-export const avatarEditButton = document.querySelector('.profile__avatar');
+export const avatarEditButton = document.querySelector('.profile__avatar-button');
  
   
 export const validateConfig = {

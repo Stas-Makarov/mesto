@@ -1,0 +1,21 @@
+.profile__avatar-button {
+    background-image: url('../../../images/карандаш.авы.svg');
+    background-size: 26px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    border: none;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity .3s
+}
+
+.profile__avatar-button:hover {
+    opacity: 1;
+}

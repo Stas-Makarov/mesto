@@ -46,8 +46,14 @@ function initProfile(data) {
 const api = new Api(settings);
 
 Promise.all([
-  api.getInitialCards(),
+  api.getInitialCards()
+    .catch((err) => {
+      console.log(err);
+    }),
   api.getUserInfo()
+    .catch((err) => {
+      console.log(err);
+    })
 ])
   .then(([cards, profileInfo]) => {
     initCards(cards, profileInfo._id);
@@ -81,13 +87,18 @@ function createCard(data, ownerId) {
                         (id) => {
                             popupWithConfirm.open();
                             popupWithConfirm.changeSubmitHandler(() =>{
-                            popupWithConfirm.setButtonText('Сохранение...');
+                              popupWithConfirm.renderLoading(true, 'Да');
                               api.deleteCard(id)
                                 .then(res =>{
                                   card.deleteCard();
                                   popupWithConfirm.close();
-                                  popupWithConfirm.setButtonText('Да');
                                 })
+                                .catch((err) => {
+                                  console.log(err);
+                                })
+                                .finally(() =>
+                                  popupWithConfirm.renderLoading(false, 'Да')
+                                );
                               }); 
                         },
                         (id) => {
@@ -99,6 +110,9 @@ function createCard(data, ownerId) {
                                 .then((data) => {
                                   card.updateLikeCount(data);
                                 })
+                                .catch((err) => {
+                                  console.log(err);
+                                })
                                 }
                                
                             else {
@@ -108,6 +122,9 @@ function createCard(data, ownerId) {
                                 })
                                 .then((data) => {
                                   card.updateLikeCount(data);
+                                })
+                                .catch((err) => {
+                                  console.log(err);
                                 })
                               } 
                             }
@@ -129,26 +146,35 @@ function addCardClickHandler() {
 function newCardSubmitHandler(data) {
   const name = data['name'];
   const link = data['link'];
-  cardPopup.setButtonText('Сохранение...');
+  cardPopup.renderLoading(true, 'Создать');
   api.addNewCard(data)
     .then(({name, link}) =>{
       const cardElement = createCard({name, link});
       cardSection.addItem(cardElement, false);
-      cardPopup.setButtonText('Создать');
-    });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() =>
+      cardPopup.renderLoading(false, 'Создать')
+    );
 }
 
 function formSubmitHandler(data) {
   function profileUpdate(data) {
     profileData.editUserInfo(data);
   }
-  profilePopup.setButtonText('Сохранение...');
+  profilePopup.renderLoading(true, 'Сохранить');
   api.updateUserInfo(data)
     .then(() => {
       profileUpdate(data)
-      profilePopup.setButtonText('Сохранить');
-    }
-    );  
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() =>
+      profilePopup.renderLoading(false, 'Сохранить')
+    ); 
 }
 
 function profileButtonClickHandler() { 
@@ -159,12 +185,18 @@ function profileButtonClickHandler() {
 }
 
 function avatarSubmitHandler(data) { 
-  avatarPopup.setButtonText('Сохранение...');
+  avatarPopup.renderLoading(true, 'Сохранить');
   api.editAvatar(data)
     .then(profileData.updateAvatar(data))
     .then(() => {
       avatarPopup.close();
     })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() =>
+      avatarPopup.renderLoading(false, 'Сохранить')
+    );
 }
 
 function editAvatarClickHandler() {

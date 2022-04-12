@@ -28,6 +28,7 @@ export default class Card {
         } else {
             this._deleteLikeClass();
         }
+        
         return this._cardElement;
       }
 

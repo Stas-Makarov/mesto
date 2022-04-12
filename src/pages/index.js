@@ -144,12 +144,10 @@ function addCardClickHandler() {
 }
 
 function newCardSubmitHandler(data) {
-  const name = data['name'];
-  const link = data['link'];
   cardPopup.renderLoading(true, 'Создать');
   api.addNewCard(data)
-    .then(({name, link}) =>{
-      const cardElement = createCard({name, link});
+    .then((data) =>{
+      const cardElement = createCard(data);
       cardSection.addItem(cardElement, false);
     })
     .catch((err) => {

@@ -24,7 +24,7 @@ let ownerId;
 
 function render(data, ownerId) {
   const cardElement = createCard(data, ownerId);
-  cardSection.addItem(cardElement, true);
+  cardSection.addItem(cardElement);
 }
 
 const cardSection = new Section({ renderer: render }, cardsContainerSelector);
@@ -40,33 +40,31 @@ const profileData = new UserInfo({
 });
 
 function initProfile(data) {
+  ownerId = data._id;
   profileData.setUserInfo(data);
 }
 
 const api = new Api(settings);
 
 Promise.all([
-  api.getInitialCards()
-    .catch((err) => {
-      console.log(err);
-    }),
+  api.getInitialCards(),
   api.getUserInfo()
-    .catch((err) => {
-      console.log(err);
-    })
 ])
   .then(([cards, profileInfo]) => {
     initCards(cards, profileInfo._id);
     initProfile(profileInfo);
+  })
+  .catch((err) => {
+    console.log(err);
   });
  
-const cardPopup = new PopupWithForm(cardPopupSelector, newCardSubmitHandler);
+const cardPopup = new PopupWithForm(cardPopupSelector, handleCardFormSubmit);
 cardPopup.setEventListeners();
 
-const profilePopup = new PopupWithForm(profilePopupSelector, formSubmitHandler);
+const profilePopup = new PopupWithForm(profilePopupSelector, handleProfileFormSubmit);
 profilePopup.setEventListeners();
 
-const avatarPopup = new PopupWithForm(avatarPopupSelector, avatarSubmitHandler);
+const avatarPopup = new PopupWithForm(avatarPopupSelector, handleAvatarFormSubmit);
 avatarPopup.setEventListeners();
 
 const popupWithConfirm = new PopupWithForm(confirmPopupSelector, ); 
@@ -78,6 +76,7 @@ imagePopup.setEventListeners();
 const cardValidator = new FormValidator(validateConfig, cardPopup.getForm());
 const profileValidator = new FormValidator(validateConfig, profilePopup.getForm());
 const avatarValidator = new FormValidator(validateConfig, avatarPopup.getForm());
+
 
 function createCard(data, ownerId) {
   const card = new Card(data, 
@@ -91,6 +90,8 @@ function createCard(data, ownerId) {
                               api.deleteCard(id)
                                 .then(res =>{
                                   card.deleteCard();
+                                })
+                                .then(() => {
                                   popupWithConfirm.close();
                                 })
                                 .catch((err) => {
@@ -105,23 +106,17 @@ function createCard(data, ownerId) {
                             if (card.isLiked()) {
                               api.deleteLike(id)
                                 .then((data) => {
-                                  return data.likes.length
-                                })
-                                .then((data) => {
-                                  card.updateLikeCount(data);
+                                  card.setData(data);
+                                  card.updateLikeCount();
                                 })
                                 .catch((err) => {
                                   console.log(err);
                                 })
-                                }
-                               
-                            else {
+                                } else {
                               api.putLike(id)              
                                 .then((data) => {
-                                  return data.likes.length
-                                })
-                                .then((data) => {
-                                  card.updateLikeCount(data);
+                                  card.setData(data);
+                                  card.updateLikeCount();
                                 })
                                 .catch((err) => {
                                   console.log(err);
@@ -138,17 +133,20 @@ function openImagePopup(data) {
   imagePopup.open(data);
 }
 
-function addCardClickHandler() {
+function openCardPopup() {
   cardValidator.resetValidation();
   cardPopup.open();
 }
 
-function newCardSubmitHandler(data, ownerId) {
+function handleCardFormSubmit(data) {
   cardPopup.renderLoading(true, 'Создать');
   api.addNewCard(data)
     .then((data) => {
       const cardElement = createCard(data, ownerId);
       cardSection.addItem(cardElement, false);
+    })
+    .then(() => {
+      cardPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -158,14 +156,15 @@ function newCardSubmitHandler(data, ownerId) {
     );
 }
 
-function formSubmitHandler(data) {
-  function profileUpdate(data) {
-    profileData.editUserInfo(data);
-  }
+function handleProfileFormSubmit(data) {
   profilePopup.renderLoading(true, 'Сохранить');
+  
   api.updateUserInfo(data)
+    .then((data) => {
+      profileData.setUserInfo(data);
+    })
     .then(() => {
-      profileUpdate(data)
+      profilePopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -175,17 +174,19 @@ function formSubmitHandler(data) {
     ); 
 }
 
-function profileButtonClickHandler() { 
+function openProfilePopup() { 
   const userData = profileData.getUserInfo();
   profilePopup.setInputValues(userData);
   profileValidator.resetValidation();
   profilePopup.open();
 }
 
-function avatarSubmitHandler(data) { 
+function handleAvatarFormSubmit(data) { 
   avatarPopup.renderLoading(true, 'Сохранить');
   api.editAvatar(data)
-    .then(profileData.updateAvatar(data))
+    .then((data) => {
+      profileData.setUserInfo(data);
+    })
     .then(() => {
       avatarPopup.close();
     })
@@ -197,7 +198,7 @@ function avatarSubmitHandler(data) {
     );
 }
 
-function editAvatarClickHandler() {
+function openAvatarPopup() {
   avatarValidator.resetValidation();
   avatarPopup.open();
 }
@@ -206,6 +207,6 @@ cardValidator.enableValidation();
 profileValidator.enableValidation();
 avatarValidator.enableValidation();
 
-profileEditButton.addEventListener('click', profileButtonClickHandler);
-profileAddButton.addEventListener('click', addCardClickHandler);
-avatarEditButton.addEventListener('click', editAvatarClickHandler);
+profileEditButton.addEventListener('click', openProfilePopup);
+profileAddButton.addEventListener('click', openCardPopup);
+avatarEditButton.addEventListener('click', openAvatarPopup);

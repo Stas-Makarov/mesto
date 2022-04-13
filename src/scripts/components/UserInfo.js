@@ -11,7 +11,7 @@ export default class UserInfo {
             about: this._profileJob.textContent,
             avatar: this._profileAvatar.src
          };
-   
+
          return this._data;
       }
     
@@ -20,13 +20,4 @@ export default class UserInfo {
         this._profileJob.textContent = about;
         this._profileAvatar.src = avatar;
     }
-
-    editUserInfo(data) {
-        this._profileName.textContent = data.name;
-        this._profileJob.textContent = data.about;
-    }
-
-    updateAvatar(data) {
-        this._profileAvatar.src = data.avatar;
-      }
 }

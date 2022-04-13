@@ -40,13 +40,13 @@ export default class FormValidator {
         this._inputList.forEach(input => {
             input.addEventListener('input', () => {
                 this._checkInputValidity(input);
-                this.checkButtonValidity(this.button);
+                this.checkButtonValidity();
             });
         });
     }
 
     resetValidation() {
-        this.checkButtonValidity(this.button); 
+        this.checkButtonValidity(); 
   
         this._inputList.forEach((input) => {
           this._hideInputError(input);
